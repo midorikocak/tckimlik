@@ -99,7 +99,7 @@ class TCKimlik{
      * State confirmation of the Turkish Identity Number
      *
      * Soap Client for checking the Turkish Identity Number communicating with the Turkish Identification identity.
-     * All of string parameters has to include exact turkish characters, otherwise it returns bool.
+     * All of string parameters has to include exact turkish characters, otherwise it returns false.
      *
      * @param $ad string Name on Identity card, has to include the middle name
      * @param $soyad  string Name on Identity card.
