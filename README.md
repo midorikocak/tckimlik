@@ -17,5 +17,6 @@ Author: Midori Kocak [Midori Kocak Website](http://www.mtkocak.net)
 
 
 ## Usage
+ * Instantiation: $kimlik = new TCKimlik('1234567890'); // You have to enter Turkish Identification Number here.
  * Validate: $kimlik->validate();
  * Ask to state: $kimlik->askToState($name,$familyName,$birthYear);
