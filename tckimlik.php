@@ -27,14 +27,14 @@ class TCKimlik{
     /**
      * Turkish Identity Number
      *
-     * @var
+     * @param int
      */
     private $tcKimlikNo;
 
     /**
      * Constructor function checks if it has eleven digits or not
      *
-     * @param $tcKimlikNo int
+     * @param int $tcKimlikNo
      */
     public function __construct($tcKimlikNo){
 
@@ -48,7 +48,7 @@ class TCKimlik{
     /**
      * Turkish uppercase function due to "İ" and "i" clash.
      *
-     * @param $str string
+     * @param string $str
      * @return string
      */
     function strtoupperTR($str)
@@ -101,9 +101,9 @@ class TCKimlik{
      * Soap Client for checking the Turkish Identity Number communicating with the Turkish Identification identity.
      * All of string parameters has to include exact turkish characters, otherwise it returns false.
      *
-     * @param $ad string Name on Identity card, has to include the middle name
-     * @param $soyad  string Name on Identity card.
-     * @param $dogumYili int Birth year on Identity Card
+     * @param string $ad Name on Identity card, has to include the middle name
+     * @param string $soyad Name on Identity card.
+     * @param int $dogumYili Birth year on Identity Card
      * @return bool
      */
     public function askToState($ad,$soyad,$dogumYili)
