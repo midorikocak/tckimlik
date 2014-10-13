@@ -1,4 +1,4 @@
-#Turkish Identification Validation Class
+#Turkish Identity Validation Class
 
 The Validation class for Turkish Identification (tcKimlikNo) Number using SOAP Web Service Client.
 Author: Midori Kocak [Midori Kocak Website](http://www.mtkocak.net)
