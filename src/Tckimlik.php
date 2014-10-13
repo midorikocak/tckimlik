@@ -14,7 +14,7 @@
  *
  * Usage:
  *
- * $kimlik = new TCKimlik("12345678910");
+ * $kimlik = new Midori\TCKimlik("12345678910");
  *
  *  Validate: $kimlik->validate();
  *  Ask to state: $kimlik->askToState($name,$familyName,$birthYear);
@@ -22,6 +22,9 @@
  *
  * @author     Midori Kocak <mtkocak@mtkocak.net>
  */
+
+namespace Midori;
+
 class TCKimlik{
 
     /**

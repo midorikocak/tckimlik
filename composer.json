@@ -1,0 +1,24 @@
+{
+    "name": "mtkocak/tckimlik",
+    "type": "library",
+    "description": "The Validation class for Turkish Identification (tcKimlikNo) Number using SOAP Web Service Client.",
+    "keywords": ["validation","turkish","tckimlik","tckimlikno","digit"],
+    "homepage": "http://github.com/mtkocak/tckimlik",
+    "license": "GPL-3.0+",
+    "authors": [
+        {
+            "name": "Midori Kocak",
+            "email": "mtkocak@mtkocak.net",
+            "homepage": "http://www.mtkocak.com",
+            "role": "Consultant Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Midori\\": "src"
+        }
+    }
+}
