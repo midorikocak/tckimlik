@@ -83,7 +83,7 @@ class TCKimlik{
                 $evenSum += $this->tcKimlikNo[$i];
             }
         }
-        $tenthDigit = (($oddSum*7) - $evenSum) % 10;
+        $tenthDigit = ((($oddSum*7) - $evenSum)+10) % 10;
         if($tenthDigit!=$this->tcKimlikNo[9])
         {
             return false;
