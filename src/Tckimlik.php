@@ -62,7 +62,7 @@ class TCKimlik{
         if ($encoding) { 
             mb_internal_encoding($encoding); 
         }
-        return mb_convert_case($str);
+        return mb_convert_case($str, MB_CASE_UPPER);
     }
 
     /**
