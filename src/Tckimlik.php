@@ -32,32 +32,37 @@ class TCKimlik{
      *
      * @param int
      */
-    private $tcKimlikNo;
+    private $tcIdentificationNo;
 
     /**
      * Constructor function checks if it has eleven digits or not
      *
-     * @param int $tcKimlikNo
+     * @param int $tcIdentificationNo
      */
-    public function __construct($tcKimlikNo){
+    public function __construct($tcIdentificationNo){
 
-        if((int)log($tcKimlikNo,10)!=10){
+        if((int)log($tcIdentificationNo,10)!=10){
             return false;
         }
 
-        $this->tcKimlikNo = $tcKimlikNo;
+        $this->tcIdentificationNo = $tcIdentificationNo;
     }
 
     /**
      * Turkish uppercase function due to "İ" and "i" clash.
-     *
+     * 
+     * @see http://php.net/manual/en/ref.mbstring.php
+     * 
      * @param string $str
+     * @param string $encoding 
      * @return string
      */
-    function strtoupperTR($str)
+    function strtoupperTR($str, $encoding = null)
     {
-        $str = str_replace(array('i', 'ı', 'ü', 'ğ', 'ş', 'ö', 'ç'), array('İ', 'I', 'Ü', 'Ğ', 'Ş', 'Ö', 'Ç'), $str);
-        return strtoupper($str);
+        if ($encoding) { 
+            mb_internal_encoding($encoding); 
+        }
+        return mb_convert_case($str, MB_CASE_UPPER);
     }
 
     /**
@@ -69,7 +74,7 @@ class TCKimlik{
     {
         $oddSum = 0;
         $evenSum = 0;
-        if(substr($this->tcKimlikNo,0,1)==0)
+        if(substr($this->tcIdentificationNo,0,1)==0)
         {
             return false;
         }
@@ -77,21 +82,21 @@ class TCKimlik{
         {
             if($i%2==0)
             {
-                $oddSum += $this->tcKimlikNo[$i];
+                $oddSum += $this->tcIdentificationNo[$i];
             }
             else{
-                $evenSum += $this->tcKimlikNo[$i];
+                $evenSum += $this->tcIdentificationNo[$i];
             }
         }
         $tenthDigit = ((($oddSum*7) - $evenSum)+10) % 10;
-        if($tenthDigit!=$this->tcKimlikNo[9])
+        if($tenthDigit!=$this->tcIdentificationNo[9])
         {
             return false;
         }
 
         $eleventhDigit = ($oddSum + $evenSum + $tenthDigit) % 10;
 
-        if($eleventhDigit!=$this->tcKimlikNo[10])
+        if($eleventhDigit!=$this->tcIdentificationNo[10])
         {
             return false;
         }
@@ -104,19 +109,19 @@ class TCKimlik{
      * Soap Client for checking the Turkish Identity Number communicating with the Turkish Identification identity.
      * All of string parameters has to include exact turkish characters, otherwise it returns false.
      *
-     * @param string $ad Name on Identity card, has to include the middle name
-     * @param string $soyad Name on Identity card.
-     * @param int $dogumYili Birth year on Identity Card
+     * @param string $name Name on Identity card, has to include the middle name
+     * @param string $surname Name on Identity card.
+     * @param int $birthYear Birth year on Identity Card
      * @return bool
      */
-    public function askToState($ad,$soyad,$dogumYili)
+    public function askToState($name,$surname,$birthYear)
     {
         if(!$this->validate())
         {
             return false;
         }
         $client = new SoapClient('https://tckimlik.nvi.gov.tr/Service/KPSPublic.asmx?WSDL');
-        $result = $client->TcKimlikNoDogrula(array('TCKimlikNo'=>$this->tcKimlikNo, 'Ad'=>$this->strtoupperTR($ad), 'Soyad'=>$this->strtoupperTR($soyad), 'DogumYili'=>$dogumYili));
+        $result = $client->TcKimlikNoDogrula(array('TCKimlikNo'=>$this->tcIdentificationNo, 'Ad'=>$this->strtoupperTR($name), 'Soyad'=>$this->strtoupperTR($surname), 'DogumYili'=>$birthYear));
         return $result->TCKimlikNoDogrulaResult;
     }
 }
