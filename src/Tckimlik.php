@@ -57,12 +57,9 @@ class TCKimlik{
      * @param string $encoding 
      * @return string
      */
-    function strtoupperTR($str, $encoding = null)
+    function strtoupperTR($str)
     {
-        if ($encoding) { 
-            mb_internal_encoding($encoding); 
-        }
-        return mb_convert_case($str, MB_CASE_UPPER);
+        return mb_strtoupper($str,"UTF-8");
     }
 
     /**
