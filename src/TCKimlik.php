@@ -120,7 +120,7 @@ class TCKimlik{
         {
             return false;
         }
-        $client = new SoapClient('https://tckimlik.nvi.gov.tr/Service/KPSPublic.asmx?WSDL');
+        $client = new \SoapClient('https://tckimlik.nvi.gov.tr/Service/KPSPublic.asmx?WSDL');
         $result = $client->TcKimlikNoDogrula(array('TCKimlikNo'=>$this->tcIdentificationNo, 'Ad'=>$this->strtoupperTR($name), 'Soyad'=>$this->strtoupperTR($surname), 'DogumYili'=>$birthYear));
         return $result->TCKimlikNoDogrulaResult;
     }
